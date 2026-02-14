@@ -6,10 +6,13 @@ import Footer from '@/components/Footer';
 
 const ElderCarePage = () => {
   return (
-    <div className="min-h-screen bg-slate-50 font-sans text-slate-700 flex flex-col">
-      <Navbar activeMenu="กิจกรรม" />
+    <div className="min-h-screen font-sans text-slate-700 flex flex-col">
+      <Navbar activeMenu="หน้าแรก" />
 
-      <header className="flex flex-col md:flex-row items-center justify-between px-20 py-16 bg-blue-50/30">
+      <header 
+        style={{ backgroundColor: '#EEF3F8' }} 
+        className="flex flex-col md:flex-row items-center justify-between px-20 py-16"
+      >
         <div className="max-w-xl">
           <h1 className="text-5xl font-bold text-black leading-tight mb-6">
             คู่มือการดูแล<br />
@@ -31,7 +34,7 @@ const ElderCarePage = () => {
         </div>
       </header>
 
-      <section className="px-20 py-16">
+      <section className="bg-white px-20 py-16">
         <div className="flex justify-between items-end mb-10">
           <div>
             <h2 className="text-3xl font-bold text-gray-800 mb-2">บทความยอดนิยม</h2>
@@ -60,7 +63,7 @@ const ElderCarePage = () => {
               img: "https://images.unsplash.com/photo-1550572017-ed9a027df9f4?q=80&w=400"
             }
           ].map((item, idx) => (
-            <div key={idx} className="bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100 flex flex-col h-full">
+            <div key={idx} className="bg-slate-50 rounded-xl overflow-hidden shadow-sm border border-gray-100 flex flex-col h-full">
               <img src={item.img} alt={item.title} className="h-48 w-full object-cover" />
               <div className="p-6 flex flex-col grow">
                 <h3 className="font-bold text-lg mb-3 leading-snug">{item.title}</h3>
@@ -74,7 +77,10 @@ const ElderCarePage = () => {
         </div>
       </section>
 
-      <section className="bg-blue-50/40 px-20 py-16">
+      <section 
+        style={{ backgroundColor: '#E7F2FD' }} 
+        className="px-20 py-16"
+      >
         <div className="mb-10 flex justify-between items-end">
           <div>
             <p className="text-blue-500 font-bold text-xs tracking-widest uppercase mb-2">NUTRITIONAL BALANCE</p>
@@ -92,7 +98,7 @@ const ElderCarePage = () => {
             { name: "ต้มยำปลากะพง", tag: "โปรตีนคุณภาพดี กระตุ้นความอยากอาหาร", img: "https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?q=80&w=300" },
             { name: "ไข่ตุ๋นทรงเครื่อง", tag: "โปรตีนและผักหลากหลาย เคี้ยวง่าย", img: "https://images.unsplash.com/photo-1594759842811-134623269bd9?q=80&w=300" },
           ].map((food, idx) => (
-            <div key={idx} className="bg-white rounded-xl overflow-hidden shadow-sm">
+            <div key={idx} className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
               <img src={food.img} alt={food.name} className="h-44 w-full object-cover" />
               <div className="p-4">
                 <h4 className="font-bold text-gray-800 mb-1">{food.name}</h4>
