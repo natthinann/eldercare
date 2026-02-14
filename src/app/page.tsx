@@ -50,17 +50,17 @@ const ElderCarePage = () => {
             {
               title: "10 จุดเสี่ยงในบ้านที่ต้องระวังสำหรับผู้สูงอายุ",
               desc: "เนื่องจากกระดูกของผู้สูงอายุมักจะเปราะและแตกหักง่ายยิ่งถ้าผู้สูงอายุมีโรคประจำตัว...",
-              img: "https://images.unsplash.com/photo-1516733968668-dbdce39c46ef?q=80&w=400"
+              img: "/Risk-point.png"
             },
             {
               title: "สุขภาพจิตผู้สูงอายุ เรื่องสำคัญที่ไม่ควรมองข้าม",
               desc: "หลายครั้งพบว่ามีผู้ดูแลและคนใกล้ชิดมาปรึกษาถึงวิธีการรับมือและปรับตัวกับบุคลิกภาพของผู้สูงอายุที่เปลี่ยนแปลงไปจากเดิม...",
-              img: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?q=80&w=400"
+              img: "/Mental-health.png"
             },
             {
               title: "ผู้สูงอายุกับปัญหาการกินยา เรื่องสำคัญไม่ควรมองข้าม",
               desc: "ขั้นตอนการดูแลสุขภาพส่วนตัวนี้จะช่วยให้ทั้งผู้ดูแลและผู้สูงอายุรู้สึกผ่อนคลายและลดอุบัติเหตุ...",
-              img: "https://images.unsplash.com/photo-1550572017-ed9a027df9f4?q=80&w=400"
+              img: "/Taking-medicine.png"
             }
           ].map((item, idx) => (
             <div key={idx} className="bg-slate-50 rounded-xl overflow-hidden shadow-sm border border-gray-100 flex flex-col h-full">
@@ -93,10 +93,10 @@ const ElderCarePage = () => {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
           {[
-            { name: "ข้าวต้มปลา", tag: "โปรตีนคุณภาพดี ย่อยง่าย", img: "https://plus.unsplash.com/premium_photo-1663852297267-827c73e7529e?q=80&w=300" },
-            { name: "แกงจืดเต้าหู้หมูสับ", tag: "โปรตีนคุณภาพดีน้ำซุปช่วยเพิ่มน้ำให้ร่างกาย", img: "https://images.unsplash.com/photo-1547592166-23ac45744acd?q=80&w=300" },
-            { name: "ต้มยำปลากะพง", tag: "โปรตีนคุณภาพดี กระตุ้นความอยากอาหาร", img: "https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?q=80&w=300" },
-            { name: "ไข่ตุ๋นทรงเครื่อง", tag: "โปรตีนและผักหลากหลาย เคี้ยวง่าย", img: "https://images.unsplash.com/photo-1594759842811-134623269bd9?q=80&w=300" },
+            { name: "ข้าวต้มปลา", tag: "โปรตีนคุณภาพดี ย่อยง่าย", img: "https://www.thammculture.com/wp-content/uploads/2023/03/Untitled-402.jpg" },
+            { name: "แกงจืดเต้าหู้หมูสับ", tag: "โปรตีนคุณภาพดีน้ำซุปช่วยเพิ่มน้ำให้ร่างกาย", img: "https://img.wongnai.com/p/1920x0/2019/01/20/95d74f441c1448a6a352de4a10744d14.jpg" },
+            { name: "ต้มยำปลากะพง", tag: "โปรตีนคุณภาพดี กระตุ้นความอยากอาหาร", img: "https://assets.unileversolutions.com/recipes-v2/117752.jpg" },
+            { name: "ไข่ตุ๋นทรงเครื่อง", tag: "โปรตีนและผักหลากหลาย เคี้ยวง่าย", img: "https://images.aws.nestle.recipes/original/12f17c7de982b57fdf3e4c9091cd3b29_steamed-egg-with-minced-pork.jpeg" },
           ].map((food, idx) => (
             <div key={idx} className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
               <img src={food.img} alt={food.name} className="h-44 w-full object-cover" />
