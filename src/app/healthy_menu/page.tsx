@@ -10,9 +10,10 @@ interface FoodCardProps {
   image: string;
   title: string;
   description: string;
+  recipeUrl: string; 
 }
 
-const FoodCard: React.FC<FoodCardProps> = ({ image, title, description }) => (
+const FoodCard: React.FC<FoodCardProps> = ({ image, title, description, recipeUrl }) => (
   <div className="bg-white rounded-xl shadow-sm overflow-hidden flex flex-col h-full border border-gray-100 hover:shadow-md transition-shadow group">
     <div className="aspect-4/3 overflow-hidden">
       <img 
@@ -23,27 +24,92 @@ const FoodCard: React.FC<FoodCardProps> = ({ image, title, description }) => (
     <div className="p-5 flex flex-col grow text-left">
       <h3 className="text-xl font-bold text-gray-800 mb-2">{title}</h3>
       <p className="text-gray-500 text-sm mb-6 grow">{description}</p>
-      <button className="w-full py-2 px-4 border border-blue-400 text-blue-500 rounded-full text-sm font-medium hover:bg-blue-600 hover:text-white transition-colors">
+      
+      <a 
+        href={recipeUrl} 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        className="w-full py-2 px-4 border border-blue-400 text-blue-500 rounded-full text-sm font-medium hover:bg-blue-600 hover:text-white transition-colors text-center">
         ดูสูตรอาหาร
-      </button>
+      </a>
     </div>
   </div>
 );
 
 const HealthyMenuPage: React.FC = () => {
   const menuItems = [
-    { title: "ข้าวต้มปลา", description: "โปรตีนคุณภาพดี ย่อยง่าย", image: "https://www.thammculture.com/wp-content/uploads/2023/03/Untitled-402.jpg" },
-    { title: "แกงจืดเต้าหู้หมูสับ", description: "โปรตีนคุณภาพดี น้ำซุปช่วยเพิ่มน้ำให้ร่างกาย", image: "https://img.wongnai.com/p/1920x0/2019/01/20/95d74f441c1448a6a352de4a10744d14.jpg" },
-    { title: "ต้มยำปลากะพง", description: "โปรตีนคุณภาพดี กระตุ้นความอยากอาหาร", image: "https://assets.unileversolutions.com/recipes-v2/117752.jpg" },
-    { title: "ไข่ตุ๋นทรงเครื่อง", description: "โปรตีนและผักหลากหลาย เคี้ยวง่าย", image: "https://images.aws.nestle.recipes/original/12f17c7de982b57fdf3e4c9091cd3b29_steamed-egg-with-minced-pork.jpeg" },
-    { title: "แกงส้มชะอมไข่", description: "แคลเซียมและวิตามินสูง", image: "https://kin-keng.com/wp-content/uploads/2024/03/%E0%B8%A7%E0%B8%B1%E0%B8%95%E0%B8%96%E0%B8%B8%E0%B8%94%E0%B8%B4%E0%B8%9A%E0%B8%97%E0%B8%B3%E0%B9%81%E0%B8%81%E0%B8%87%E0%B8%AA%E0%B9%89%E0%B8%A1-819x1024.jpg" },
-    { title: "แกงเลียงกุ้งสด", description: "ผักหลากหลาย โปรตีนจากกุ้ง", image: "https://www.ajinomoto.co.th/storage/photos/shares/Recipe/Menu/04gangliang/614b190b4e14d.jpg" },
-    { title: "โจ๊กข้าวโอ๊ต", description: "คาร์โบไฮเดรตเชิงซ้อน อิ่มนานกว่าข้าวขาว ช่วยลดคอเลสเตอรอล", image: "https://img.wongnai.com/p/1920x0/2017/09/21/92bba405fb1f4e0399c1188a6653268a.jpg" },
-    { title: "ต้มเลือดหมู", description: "แหล่งธาตุเหล็กชั้นดีจากเลือดและตับ", image: "https://f.ptcdn.info/368/087/000/m887tilbi7rjboK7P72-o.jpg" },
-    { title: "ต้มจับฉ่ายน่องไก่", description: "รวมมิตรผักใบเขียวจนเปื่อยนุ่ม กินง่าย", image: "https://img.wongnai.com/p/1920x0/2019/03/26/de66b8d0a19248088a3465272c5a18e0.jpg" },
-    { title: "ปลานึ่งสมุนไพร", description: "โปรตีนคุณภาพดีที่สุด ย่อยง่าย ไร้น้ำมัน", image: "https://img.wongnai.com/p/1920x0/2017/08/31/50dda4de43c047659c7ebd97899dcd1d.jpg" },
-    { title: "ทอดมันปลา", description: "โปรตีนจากเนื้อปลาเน้นๆ มีสมุนไพรจากพริกแกงและถั่วฝักยาว", image: "https://img.wongnai.com/p/1920x0/2019/03/24/03eca72140ef425f95655aed1af68c86.jpg" },
-    { title: "ผัดดอกกุยช่ายกุ้ง", description: "ช่วยระบบขับถ่ายได้โปรตีนไขมันต่ำจากกุ้ง", image: "https://img.wongnai.com/p/1920x0/2020/03/02/0486361c74b14206b9cd9938bfd2487b.jpg" },
+    { 
+      title: "ข้าวต้มปลา", 
+      description: "โปรตีนคุณภาพดี ย่อยง่าย", 
+      image: "https://www.thammculture.com/wp-content/uploads/2023/03/Untitled-402.jpg",
+      recipeUrl: "https://www.wongnai.com/recipes/boiled-rice-with-fish" 
+    },
+    { 
+      title: "แกงจืดเต้าหู้หมูสับ", 
+      description: "โปรตีนคุณภาพดี น้ำซุปช่วยเพิ่มน้ำให้ร่างกาย", 
+      image: "https://img.wongnai.com/p/1920x0/2019/01/20/95d74f441c1448a6a352de4a10744d14.jpg",
+      recipeUrl: "https://www.wongnai.com/recipes/soup-with-egg-tofu-and-mine-pork"
+    },
+    { 
+      title: "ต้มยำปลากะพง", 
+      description: "โปรตีนคุณภาพดี กระตุ้นความอยากอาหาร", 
+      image: "https://assets.unileversolutions.com/recipes-v2/117752.jpg",
+      recipeUrl: "https://www.knorr.com/th/r/%E0%B8%95%E0%B9%89%E0%B8%A1%E0%B8%A2%E0%B8%B3%E0%B8%9B%E0%B8%A5%E0%B8%B2%E0%B8%81%E0%B8%B0%E0%B8%9E%E0%B8%87%E0%B8%99%E0%B9%89%E0%B8%B3%E0%B9%83%E0%B8%AA.html/117752"
+    },
+    { 
+      title: "ไข่ตุ๋นทรงเครื่อง", 
+      description: "โปรตีนและผักหลากหลาย เคี้ยวง่าย", 
+      image: "https://images.aws.nestle.recipes/original/12f17c7de982b57fdf3e4c9091cd3b29_steamed-egg-with-minced-pork.jpeg",
+      recipeUrl: "https://www.wongnai.com/mali/recipes/steamed-egg"
+    },
+    { 
+      title: "แกงส้มชะอมไข่", 
+      description: "แคลเซียมและวิตามินสูง", 
+      image: "https://kin-keng.com/wp-content/uploads/2024/03/%E0%B8%A7%E0%B8%B1%E0%B8%95%E0%B8%96%E0%B8%B8%E0%B8%94%E0%B8%B4%E0%B8%9A%E0%B8%97%E0%B8%B3%E0%B9%81%E0%B8%81%E0%B8%87%E0%B8%AA%E0%B9%89%E0%B8%A1-819x1024.jpg",
+      recipeUrl: "https://www.wongnai.com/recipes/sour-curry-with-cha-om-omelet-and-shrimp"
+    },
+    { 
+      title: "แกงเลียงกุ้งสด", 
+      description: "ผักหลากหลาย โปรตีนจากกุ้ง", 
+      image: "https://www.ajinomoto.co.th/storage/photos/shares/Recipe/Menu/04gangliang/614b190b4e14d.jpg",
+      recipeUrl: "https://www.wongnai.com/recipes/thai-spicy-mixed-vegetable-soup"
+    },
+    { 
+      title: "โจ๊กข้าวโอ๊ต", 
+      description: "คาร์โบไฮเดรตเชิงซ้อน อิ่มนานกว่าข้าวขาว ช่วยลดคอเลสเตอรอล", 
+      image: "https://img.wongnai.com/p/1920x0/2017/09/21/92bba405fb1f4e0399c1188a6653268a.jpg",
+      recipeUrl: "https://www.wongnai.com/recipes/ugc/9adaa6bea18a4003b1693193d7e729bc"
+    },
+    { 
+      title: "ต้มเลือดหมู", 
+      description: "แหล่งธาตุเหล็กชั้นดีจากเลือดและตับ", 
+      image: "https://f.ptcdn.info/368/087/000/m887tilbi7rjboK7P72-o.jpg",
+      recipeUrl: "https://www.wongnai.com/recipes/ugc/eb5a9e0583ab46438c448d92fea95367"
+    },
+    { 
+      title: "ต้มจับฉ่ายน่องไก่", 
+      description: "รวมมิตรผักใบเขียวจนเปื่อยนุ่ม กินง่าย", 
+      image: "https://img.wongnai.com/p/1920x0/2019/03/26/de66b8d0a19248088a3465272c5a18e0.jpg",
+      recipeUrl: "https://www.wongnai.com/recipes/chinese-vegetable-stew-with-chicken-drumsticks"
+    },
+    { 
+      title: "ปลานึ่งสมุนไพร", 
+      description: "โปรตีนคุณภาพดีที่สุด ย่อยง่าย ไร้น้ำมัน", 
+      image: "https://img.wongnai.com/p/1920x0/2017/08/31/50dda4de43c047659c7ebd97899dcd1d.jpg",
+      recipeUrl: "https://www.wongnai.com/recipes/ugc/e444840f990341bbb43de81bfe78c613"
+    },
+    { 
+      title: "ทอดมันปลา", 
+      description: "โปรตีนจากเนื้อปลาเน้นๆ มีสมุนไพรจากพริกแกงและถั่วฝักยาว", 
+      image: "https://img.wongnai.com/p/1920x0/2019/03/24/03eca72140ef425f95655aed1af68c86.jpg",
+      recipeUrl: "https://www.wongnai.com/recipes/fish-cake"
+    },
+    { 
+      title: "ผัดดอกกุยช่ายกุ้ง", 
+      description: "ช่วยระบบขับถ่ายได้โปรตีนไขมันต่ำจากกุ้ง", 
+      image: "https://img.wongnai.com/p/1920x0/2020/03/02/0486361c74b14206b9cd9938bfd2487b.jpg",
+      recipeUrl: "https://www.wongnai.com/recipes/ugc/43ec0b6f78834ceba93bee4d46efa905"
+    },
   ];
 
   return (
