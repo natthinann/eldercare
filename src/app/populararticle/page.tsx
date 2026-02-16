@@ -1,141 +1,114 @@
-import React from 'react';
+"use client";
 
-interface Article {
-  id: number;
-  title: string;
-  excerpt: string;
-  image: string;
-  overlayText: string;
-  overlayColor: string;
-}
+import { useState } from 'react';
+import Link from 'next/link';
+import { ArrowRight, ChevronLeft, Calendar } from 'lucide-react';
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
+import { articlesData } from '@/app/articles_1/data';
 
-const ARTICLE_DATA: Article[] = [
-  {
-    id: 1,
-    title: "10 จุดเสี่ยงในบ้านที่ต้องระวังสำหรับผู้สูงอายุ",
-    excerpt: "เนื่องจากกระดูกของผู้สูงอายุมักจะเปราะและแตกหักง่ายยิ่งถ้าผู้สูงอายุมีโรคประจำตัว...",
-    image: "https://images.unsplash.com/photo-1513159419869-1133c33dfa22?auto=format&fit=crop&q=80&w=500",
-    overlayText: "10 จุดเสี่ยงในบ้านที่ต้องระวังสำหรับผู้สูงอายุ",
-    overlayColor: "bg-red-700/50"
-  },
-  {
-    id: 2,
-    title: "สุขภาพจิตผู้สูงอายุ เรื่องสำคัญที่ไม่ควรมองข้าม",
-    excerpt: "หลายครั้งพบว่านี่ผู้ดูแลและคนใกล้ชิดมักปรึกษาถึงวิธีการรับมือและปรับตัวกับบุคลิกภาพของผู้สูงอายุ...",
-    image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&q=80&w=500",
-    overlayText: "สุขภาพจิตผู้สูงอายุ เรื่องสำคัญที่ไม่ควรมองข้าม",
-    overlayColor: "bg-blue-400/50"
-  },
-  {
-    id: 3,
-    title: "ผู้สูงอายุกับปัญหาการกินยา เรื่องสำคัญไม่ควรมองข้าม",
-    excerpt: "ขั้นตอนการดูแลสุขภาพส่วนตัวที่จะช่วยให้ทั้งผู้ดูแลและผู้สูงอายุรู้สึกผ่อนคลายและลดอุบัติเหตุ...",
-    image: "https://images.unsplash.com/photo-1584362917165-526a968579e8?auto=format&fit=crop&q=80&w=500",
-    overlayText: "ผู้สูงอายุกับปัญหาการกินยา เรื่องสำคัญไม่ควรมองข้าม",
-    overlayColor: "bg-teal-500/50"
-  },
-  {
-    id: 4,
-    title: "ผู้สูงอายุสุขภาพดี เริ่มที่การดูแลสุขภาพช่องปาก",
-    excerpt: "การดูแลสุขภาพช่องปากผู้สูงอายุเป็นสิ่งที่สำคัญต่อสุขภาพร่างกายและการดำเนินชีวิตประจำวัน...",
-    image: "https://images.unsplash.com/photo-1581578731522-7b7547c6a21f?auto=format&fit=crop&q=80&w=500",
-    overlayText: "ผู้สูงอายุสุขภาพดี เริ่มที่การดูแลสุขภาพช่องปาก",
-    overlayColor: "bg-emerald-600/50"
-  },
-  {
-    id: 5,
-    title: "กลืนลำบาก สำลักบ่อย หนึ่งในปัญหาของผู้สูงอายุที่พบบ่อย",
-    excerpt: "หนึ่งในปัญหาของผู้สูงอายุที่พบน้อย คือ ความสามารถในการกลืนอาหารและน้ำนั้นลดลง...",
-    image: "https://images.unsplash.com/photo-1516307364728-25b1ea4c6c74?auto=format&fit=crop&q=80&w=500",
-    overlayText: "กลืนลำบาก สำลักบ่อย หนึ่งในปัญหาของผู้สูงอายุที่พบบ่อย",
-    overlayColor: "bg-sky-500/50"
-  },
-  {
-    id: 6,
-    title: "การดูแลผู้สูงอายุที่มีอาการหลงลืมที่บ้านอย่างไรให้เหมาะสมและปลอดภัย",
-    excerpt: "ผู้สูงอายุที่มีอาการหลงลืม จึงทำให้การดูแลผู้สูงอายุกลายเป็นเรื่องกังวลใจของหลายคน...",
-    image: "https://images.unsplash.com/photo-1542810634-71277d95dcbb?auto=format&fit=crop&q=80&w=500",
-    overlayText: "การดูแลผู้สูงอายุที่มีอาการหลงลืมที่บ้านอย่างไรให้เหมาะสมและปลอดภัย",
-    overlayColor: "bg-green-800/50"
-  },
-  {
-    id: 7,
-    title: "เตรียมตัวอย่างไรเมื่อต้องเป็น \"ผู้ดูแลผู้สูงอายุในครอบครัว\"",
-    excerpt: "เพราะผู้สูงอายุ คือ บุคคลอันเป็นที่รักของทุกครอบครัว ไม่ว่าจะเป็นการเปลี่ยนแปลงไปมากแค่ไหน...",
-    image: "https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?auto=format&fit=crop&q=80&w=500",
-    overlayText: "เตรียมตัวอย่างไรเมื่อต้องเป็น \"ผู้ดูแลผู้สูงอายุในครอบครัว\"",
-    overlayColor: "bg-slate-500/50"
-  },
-  {
-    id: 8,
-    title: "ปัญหาของผู้สูงอายุที่พบบ่อย หากปล่อยไว้กระทบคุณภาพชีวิต",
-    excerpt: "ปัญหาของผู้สูงอายุ เมื่ออายุเพิ่มขึ้นสภาพร่างกายและระบบการทำงานของระบบต่างๆ ในร่างกาย...",
-    image: "https://images.unsplash.com/photo-1551076805-e1869033e561?auto=format&fit=crop&q=80&w=500",
-    overlayText: "ปัญหาของผู้สูงอายุที่พบบ่อย หากปล่อยไว้กระทบคุณภาพชีวิต",
-    overlayColor: "bg-indigo-900/50"
-  },
-  {
-    id: 9,
-    title: "วัคซีนป้องกันไข้หวัดใหญ่ผู้สูงอายุ Flu High-Dose ประสิทธิภาพที่ดียิ่งขึ้น",
-    excerpt: "โรคไข้หวัดใหญ่สามารถป้องกันได้ด้วยการฉีดวัคซีนไข้หวัดใหญ่ปีละ 1 ครั้ง เป็นประจำทุกปี...",
-    image: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=500",
-    overlayText: "วัคซีนป้องกันไข้หวัดใหญ่ผู้สูงอายุ Flu High-Dose ประสิทธิภาพที่ดียิ่งขึ้น",
-    overlayColor: "bg-blue-400/50"
-  }
-];
-
-const ArticleCard: React.FC<{ article: Article }> = ({ article }) => (
-  <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden flex flex-col group cursor-pointer hover:shadow-md transition-shadow duration-300">
-    <div className="relative h-48 sm:h-56">
-      <img 
-        src={article.image} 
-        alt={article.title} 
-        className="w-full h-full object-cover"
-      />
-      <div className={`absolute inset-0 ${article.overlayColor} flex items-center justify-center p-6 text-center`}>
-        <span className="text-white font-bold text-base md:text-lg leading-tight drop-shadow-sm">
-          {article.overlayText}
-        </span>
-      </div>
+const ArticleCard = ({ id, article }: { id: string; article: any }) => (
+  <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden flex flex-col group hover:shadow-md transition-all duration-300">
+    <div className="relative h-48 sm:h-56 overflow-hidden">
+      <img
+        src={article.img}
+        alt={article.title}
+        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
     </div>
 
     <div className="p-6 flex flex-col grow">
-      <h3 className="text-[#334155] font-bold text-lg mb-3 line-clamp-2 leading-snug">
+      <div className="flex justify-between items-center mb-2">
+        <span className="text-xs font-bold text-blue-600 uppercase tracking-wider">
+          {article.category}
+        </span>
+        <span className="text-[10px] text-slate-400 flex items-center gap-1">
+          <Calendar className="w-3 h-3" /> {article.date}
+        </span>
+      </div>
+
+      <h3 className="text-[#334155] font-bold text-lg mb-3 line-clamp-2 leading-snug group-hover:text-blue-600 transition-colors">
         {article.title}
       </h3>
+
       <p className="text-[#64748b] text-sm mb-6 line-clamp-3 leading-relaxed">
-        {article.excerpt}
+        {article.content}
       </p>
+
       <div className="mt-auto">
-        <button className="text-[#3b82f6] font-bold text-sm flex items-center group-hover:gap-2 transition-all duration-300">
-          อ่านต่อ <span className="ml-1 text-lg">→</span>
-        </button>
+        <Link 
+          href={`/articles_1/${id}`} 
+          className="text-[#3b82f6] font-bold text-sm flex items-center group-hover:gap-2 transition-all duration-300">
+          อ่านต่อ <ArrowRight className="ml-1 w-4 h-4" />
+        </Link>
       </div>
     </div>
   </div>
 );
 
-const ArticlePage: React.FC = () => {
-  return (
-    <div className="bg-[#f8fafc] min-h-screen pb-20 font-['Sarabun',sans-serif]">
-      <div className="h-16 bg-white border-b border-gray-100 mb-12"></div>
+const AllArticlesPage = () => {
+  const articlesArray = Object.entries(articlesData).map(([id, data]) => ({ 
+    id, 
+    ...data as any 
+  }));
 
-      <div className="max-w-6xl mx-auto px-4">
+  const [activeCategory, setActiveCategory] = useState("ทั้งหมด");
+
+  const categories = ["ทั้งหมด", ...Array.from(new Set(articlesArray.map(item => item.category)))];
+
+  const filteredArticles = activeCategory === "ทั้งหมด"
+    ? articlesArray
+    : articlesArray.filter(article => article.category === activeCategory);
+
+  return (
+    <div className="min-h-screen font-sans text-slate-700 flex flex-col bg-[#f8fafc]">
+      <Navbar activeMenu="บทความ" />
+
+      <main className="max-w-6xl mx-auto py-10 px-6 grow w-full">
+
         <header className="mb-10">
-          <h1 className="text-3xl font-bold text-[#1e293b] mb-2">บทความยอดนิยม</h1>
-          <p className="text-[#64748b] text-base">
-            ความรู้ที่คัดสรรมาเพื่อคุณโดยผู้เชี่ยวชาญด้านการดูแลผู้สูงอายุ
-          </p>
+          <div className="flex items-center gap-4">
+            <Link 
+              href="/" 
+              className="p-1.5 bg-blue-400 rounded-md text-white hover:bg-blue-500 transition-colors shadow-sm inline-flex items-center justify-center">
+              <ChevronLeft size={20} />
+            </Link>
+            <h1 className="text-3xl font-bold text-[#1e293b]">บทความสุขภาพ</h1> 
+          </div> <br/>
+          <h1 className="text-sm ml-10 text-[#616D7D]">ความรู้ที่คัดสรรมาเพื่อการดูแลที่ถูกต้องและปลอดภัย</h1>
         </header>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-10">
-          {ARTICLE_DATA.map((article) => (
-            <ArticleCard key={article.id} article={article} />
+        <div className="flex flex-wrap gap-2 mb-10 overflow-x-auto pb-2 scrollbar-hide">
+          {categories.map((cat) => (
+            <button 
+              key={cat} 
+              onClick={() => setActiveCategory(cat)}
+              className={`px-6 py-2 rounded-full text-sm font-bold border transition-all duration-200 ${
+                activeCategory === cat 
+                  ? 'bg-blue-600 text-white border-blue-600 shadow-sm' 
+                  : 'bg-white text-slate-600 border-slate-200 hover:border-blue-300'
+              }`}
+            >
+              {cat}
+            </button>
           ))}
         </div>
-      </div>
+
+        {filteredArticles.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {filteredArticles.map((item) => (
+              <ArticleCard key={item.id} id={item.id} article={item} />
+            ))}
+          </div>
+        ) : (
+          <div className="py-20 text-center text-slate-400">
+            ไม่พบข้อมูลบทความในหมวดหมู่นี้
+          </div>
+        )}
+      </main>
+
+      <Footer />
     </div>
   );
 };
 
-export default ArticlePage;
+export default AllArticlesPage;
