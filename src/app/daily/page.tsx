@@ -1,24 +1,20 @@
 "use client";
 
-import { useState } from 'react';
-import { 
-  PlusCircle, 
-  Sun, 
-  Utensils, 
-  Users, 
-  Flower2, 
-  X, 
-  Clock, 
-  ChevronDown 
-} from 'lucide-react';
+import { useState, useEffect } from 'react';
+import {PlusCircle,Sun,Utensils,Users,Flower2,X,Clock,ChevronDown} from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
 const DailyRoutine = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const days = ['วันจันทร์', 'วันอังคาร', 'วันพุธ', 'วันพฤหัสบดี', 'วันศุกร์', 'วันเสาร์', 'วันอาทิตย์'];
-  
+
   const schedule = [
     {
       time: '07:00-08:00',
@@ -50,16 +46,10 @@ const DailyRoutine = () => {
     }
   ];
 
+  if (!mounted) return null;
+
   return (
     <div className="min-h-screen bg-slate-50 font-sans text-slate-700 flex flex-col">
-      {/* CSS สำหรับซ่อนลูกศร Datalist ของเบราว์เซอร์ไม่ให้ซ้อนกับไอคอน Lucide */}
-      <style jsx global>{`
-        input::-webkit-calendar-picker-indicator {
-          display: none !important;
-          -webkit-appearance: none;
-        }
-      `}</style>
-
       <Navbar activeMenu="กิจกรรม" />
 
       <main className="grow max-w-6xl mx-auto py-12 px-6 w-full">
@@ -67,11 +57,10 @@ const DailyRoutine = () => {
           <p className="text-blue-500 font-bold text-sm tracking-wide uppercase">DAILY ROUTINE</p>
           <div className="flex justify-between items-center flex-wrap gap-4">
             <h1 className="text-3xl font-bold text-slate-800">ตารางกิจกรรมประจำวัน</h1>
-            
-            <button 
+
+            <button
               onClick={() => setIsModalOpen(true)}
-              className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-xl flex items-center gap-2 shadow-lg shadow-blue-200 transition-all active:scale-95"
-            >
+              className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-xl flex items-center gap-2 shadow-lg shadow-blue-200 transition-all active:scale-95">
               <PlusCircle size={20} />
               <span>เพิ่มกิจกรรมใหม่</span>
             </button>
@@ -82,8 +71,8 @@ const DailyRoutine = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mt-10">
           <div className="lg:col-span-3 bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden self-start">
             {days.map((day, idx) => (
-              <div 
-                key={day} 
+              <div
+                key={day}
                 className={`px-6 py-4 cursor-pointer transition-colors flex justify-between items-center
                   ${idx === 0 ? 'bg-blue-500 text-white' : 'text-slate-600 hover:bg-slate-50 border-b border-gray-50'}`}>
                 <span className="font-medium">{day}</span>
@@ -114,12 +103,12 @@ const DailyRoutine = () => {
 
       {isModalOpen && (
         <div className="fixed inset-0 z-100 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm">
-          <div 
+          <div
             className="bg-white rounded-3xl shadow-2xl w-full max-w-lg overflow-hidden animate-in fade-in zoom-in duration-200"
             onClick={(e) => e.stopPropagation()}>
             <div className="flex justify-between items-center px-8 py-6 border-b border-gray-50">
               <h2 className="text-2xl font-bold text-slate-800">เพิ่มกิจกรรมใหม่</h2>
-              <button 
+              <button
                 onClick={() => setIsModalOpen(false)}
                 className="p-2 hover:bg-slate-100 rounded-full text-slate-400 transition-colors">
                 <X size={24} />
@@ -129,22 +118,19 @@ const DailyRoutine = () => {
             <div className="p-8 space-y-6">
               <div className="space-y-2">
                 <label className="text-[17px] font-bold text-slate-800">ชื่อกิจกรรม</label>
-                <input 
-                  type="text" 
-                  placeholder="เช่น เดินออกกำลังกายยามเช้า" 
-                  className="w-full px-5 py-4 rounded-2xl border border-slate-200 bg-slate-50/30 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all placeholder:text-slate-300"
-                />
+                <input
+                  type="text"
+                  placeholder="เช่น เดินออกกำลังกายยามเช้า"
+                  className="w-full px-5 py-4 rounded-2xl border border-slate-200 bg-slate-50/30 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all placeholder:text-slate-300" />
               </div>
 
               <div className="space-y-2">
                 <label className="text-[17px] font-bold text-slate-800">รายละเอียดเพิ่มเติม</label>
-                <textarea 
-                  placeholder="โจ๊กธัญพืชหรืออาหารที่มีกากใยสูง พร้อมผลไม้ตามฤดูกาล" 
-                  className="w-full px-5 py-4 rounded-2xl border border-slate-200 bg-slate-50/30 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all h-28 resize-none placeholder:text-slate-300"
-                />
+                <textarea
+                  placeholder="โจ๊กธัญพืชหรืออาหารที่มีกากใยสูง พร้อมผลไม้ตามฤดูกาล"
+                  className="w-full px-5 py-4 rounded-2xl border border-slate-200 bg-slate-50/30 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all h-28 resize-none placeholder:text-slate-300" />
               </div>
 
-              {/* เลือกวัน: ใช้ select + ไอคอน ChevronDown ตัวเดียว (ไม่มีลูกศรซ้อน) */}
               <div className="space-y-2">
                 <label className="text-[17px] font-bold text-slate-800">เลือกวัน</label>
                 <div className="relative flex items-center">
@@ -157,16 +143,14 @@ const DailyRoutine = () => {
                 </div>
               </div>
 
-              {/* เวลา: ใช้ datalist (พิมพ์ได้/เลือกได้) และจัดการซ่อนลูกศรระบบแล้ว */}
               <div className="grid grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <label className="text-[17px] font-bold text-slate-800">เวลาที่เริ่ม</label>
                   <div className="relative flex items-center">
-                    <input 
+                    <input
                       list="time-options"
-                      placeholder="08:00" 
-                      className="w-full px-5 py-4 rounded-2xl border border-slate-200 bg-slate-50/30 focus:outline-none focus:ring-2 focus:ring-blue-500/20" 
-                    />
+                      placeholder="08:00"
+                      className="w-full px-5 py-4 rounded-2xl border border-slate-200 bg-slate-50/30 focus:outline-none focus:ring-2 focus:ring-blue-500/20 [&::-webkit-calendar-picker-indicator]:hidden" />
                     <div className="absolute right-5 pointer-events-none text-slate-400">
                       <Clock size={18} />
                     </div>
@@ -175,11 +159,10 @@ const DailyRoutine = () => {
                 <div className="space-y-2">
                   <label className="text-[17px] font-bold text-slate-800">เวลาที่จบ</label>
                   <div className="relative flex items-center">
-                    <input 
+                    <input
                       list="time-options"
-                      placeholder="09:00" 
-                      className="w-full px-5 py-4 rounded-2xl border border-slate-200 bg-slate-50/30 focus:outline-none focus:ring-2 focus:ring-blue-500/20" 
-                    />
+                      placeholder="09:00"
+                      className="w-full px-5 py-4 rounded-2xl border border-slate-200 bg-slate-50/30 focus:outline-none focus:ring-2 focus:ring-blue-500/20 [&::-webkit-calendar-picker-indicator]:hidden" />
                     <div className="absolute right-5 pointer-events-none text-slate-400">
                       <Clock size={18} />
                     </div>
@@ -187,7 +170,6 @@ const DailyRoutine = () => {
                 </div>
               </div>
 
-              {/* ตัวเลือกเวลาแนะนำ */}
               <datalist id="time-options">
                 <option value="06:00" />
                 <option value="07:00" />
@@ -199,10 +181,9 @@ const DailyRoutine = () => {
             </div>
 
             <div className="px-8 py-6 bg-slate-50/50 flex gap-4">
-              <button 
+              <button
                 onClick={() => setIsModalOpen(false)}
-                className="flex-1 py-4 px-6 bg-white border border-slate-200 text-slate-600 font-bold rounded-2xl hover:bg-slate-100 transition-all active:scale-95 shadow-sm"
-              >
+                className="flex-1 py-4 px-6 bg-white border border-slate-200 text-slate-600 font-bold rounded-2xl hover:bg-slate-100 transition-all active:scale-95 shadow-sm">
                 ยกเลิก
               </button>
               <button className="flex-1 py-4 px-6 bg-blue-600 text-white font-bold rounded-2xl hover:bg-blue-700 shadow-lg shadow-blue-200 transition-all active:scale-95">
