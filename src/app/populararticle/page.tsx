@@ -8,12 +8,14 @@ import Footer from '@/components/Footer';
 import { articlesData } from '@/app/articles_1/data';
 
 const ArticleCard = ({ id, article }: { id: string; article: any }) => (
-  <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden flex flex-col group hover:shadow-md transition-all duration-300">
-    <div className="relative h-48 sm:h-56 overflow-hidden">
+  <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden flex flex-col group hover:shadow-md transition-all duration-300 h-full">
+
+    <div className="relative aspect-video overflow-hidden bg-slate-50 flex items-center justify-center">
       <img
         src={article.img}
         alt={article.title}
-        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+        className="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-500"
+      />
     </div>
 
     <div className="p-6 flex flex-col grow">
@@ -37,7 +39,7 @@ const ArticleCard = ({ id, article }: { id: string; article: any }) => (
       <div className="mt-auto">
         <Link 
           href={`/articles_1/${id}`} 
-          className="text-[#3b82f6] font-bold text-sm flex items-center group-hover:gap-2 transition-all duration-300">
+          className="text-[#3b82f6] font-bold text-sm flex items-center group-hover:gap-2 transition-all duration-300 w-fit">
           อ่านต่อ <ArrowRight className="ml-1 w-4 h-4" />
         </Link>
       </div>
@@ -74,7 +76,7 @@ const AllArticlesPage = () => {
             </Link>
             <h1 className="text-3xl font-bold text-[#1e293b]">บทความสุขภาพ</h1> 
           </div> <br/>
-          <h1 className="text-sm ml-10 text-[#616D7D]">ความรู้ที่คัดสรรมาเพื่อการดูแลที่ถูกต้องและปลอดภัย</h1>
+          <p className="text-sm mt-3 ml-12 text-[#616D7D]">ความรู้ที่คัดสรรมาเพื่อการดูแลที่ถูกต้องและปลอดภัย</p>
         </header>
 
         <div className="flex flex-wrap gap-2 mb-10 overflow-x-auto pb-2 scrollbar-hide">
@@ -82,12 +84,11 @@ const AllArticlesPage = () => {
             <button 
               key={cat} 
               onClick={() => setActiveCategory(cat)}
-              className={`px-6 py-2 rounded-full text-sm font-bold border transition-all duration-200 ${
+              className={`px-6 py-2 rounded-full text-sm font-bold border transition-all duration-200 whitespace-nowrap ${
                 activeCategory === cat 
                   ? 'bg-blue-600 text-white border-blue-600 shadow-sm' 
                   : 'bg-white text-slate-600 border-slate-200 hover:border-blue-300'
-              }`}
-            >
+              }`}>
               {cat}
             </button>
           ))}
@@ -100,7 +101,7 @@ const AllArticlesPage = () => {
             ))}
           </div>
         ) : (
-          <div className="py-20 text-center text-slate-400">
+          <div className="py-20 text-center text-slate-400 bg-white rounded-xl border border-dashed border-slate-200">
             ไม่พบข้อมูลบทความในหมวดหมู่นี้
           </div>
         )}
